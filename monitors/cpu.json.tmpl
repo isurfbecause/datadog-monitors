@@ -1,0 +1,23 @@
+{
+  "name": "High CPU Usage",
+  "type": "query alert",
+  "query": "avg(last_5m):avg:system.cpu.user{*} by {host} > 80",
+  "message": "CPU usage is too high!\n${alert_recipients}",
+  "tags": [
+    "env:prod",
+    "managed_by:terraform"
+  ],
+  "options": {
+    "thresholds": {
+      "critical": 80,
+      "warning": 60
+    },
+    "notify_audit": false,
+    "include_tags": true,
+    "new_group_delay": 300,
+    "notify_no_data": false,
+    "on_missing_data": "show_no_data",
+    "require_full_window": true
+  },
+  "priority": 1
+}

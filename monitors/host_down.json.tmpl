@@ -1,0 +1,24 @@
+{
+  "name": "Host {{host.name}} is down",
+  "type": "service check",
+  "query": "\"datadog.agent.up\".over(\"*\").by(\"host\").last(2).count_by_status()",
+  "message": "Host {{host.name}} is down!\n${alert_recipients}",
+  "tags": [
+    "env:prod",
+    "managed_by:terraform"
+  ],
+  "options": {
+    "thresholds": {
+      "critical": 1
+    },
+    "notify_audit": false,
+    "notify_no_data": true,
+    "no_data_timeframe": 10,
+    "renotify_interval": 0,
+    "timeout_h": 0,
+    "include_tags": true,
+    "require_full_window": true,
+    "new_group_delay": 300
+  },
+  "priority": 1
+}

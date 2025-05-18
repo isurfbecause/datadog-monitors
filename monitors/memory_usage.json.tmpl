@@ -1,0 +1,23 @@
+{
+  "name": "Memory space is low for host {{host.name}}",
+  "type": "query alert",
+  "query": "avg(last_5m):(1 - avg:system.mem.usable{*} by {host} / avg:system.mem.total{*} by {host}) * 100 >= 90",
+  "message": "Low memory space detected on host {{host.name}}. This may impact operational efficiency and lead to decreased performance.\n${alert_recipients}",
+  "tags": [
+    "env:prod",
+    "managed_by:terraform"
+  ],
+  "options": {
+    "evaluation_delay": 60,
+    "include_tags": true,
+    "new_host_delay": 300,
+    "notify_no_data": false,
+    "require_full_window": true,
+    "thresholds": {
+      "critical": 90,
+      "warning": 75
+    },
+    "notify_audit": false
+  },
+  "priority": 1
+}

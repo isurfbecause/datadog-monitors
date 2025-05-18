@@ -1,0 +1,4 @@
+*.tfstate*
+.terraform/
+prod/prod.override.tfvars
+prod/prod.tfvars

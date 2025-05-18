@@ -1,0 +1,21 @@
+{
+  "name": "Disk usage is high for host {{host.name}} on device {{device.name}}",
+  "type": "query alert",
+  "query": "avg(last_5m):(1 - avg:system.disk.free{!device:*tmpfs} by {host,device} / avg:system.disk.total{!device:*tmpfs} by {host,device}) * 100 > 90",
+  "message": "High disk usage detected for host {{host.name}} on device {{device.name}}. This may impact system performance.\n${alert_recipients}",
+  "tags": [
+    "env:prod",
+    "managed_by:terraform"
+  ],
+  "options": {
+    "thresholds": {
+      "critical": 90,
+      "warning": 80
+    },
+    "notify_audit": false,
+    "on_missing_data": "default",
+    "include_tags": true,
+    "new_group_delay": 60
+  },
+  "priority": null
+}
