@@ -1,9 +1,3 @@
-variable "environment" {
-  type        = string
-  description = "Deployment environment (dev or prod)"
-  default     = "prod"
-}
-
 variable "alert_recipients" {
   type        = string
   description = "Recipients for Datadog alert notifications"
